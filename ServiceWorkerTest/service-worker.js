@@ -6,7 +6,7 @@
 // flow and the old cache(s) will be purged as part of the activate event handler when the
 // updated service worker is activated.
 var CACHE_VERSION = 1;
-var CURRENT_CACHES = {
+var PRECACHE = {
   'read-through': 'read-through-cache-v' + CACHE_VERSION
 };
 
@@ -34,8 +34,8 @@ self.addEventListener('activate',  event => {
   // Delete all caches that aren't named in CURRENT_CACHES.
   // While there is only one cache in this example, the same logic will handle the case where
   // there are multiple versioned caches.
-  var expectedCacheNames = Object.keys(CURRENT_CACHES).map(function(key) {
-    return CURRENT_CACHES[key];
+  var expectedCacheNames = Object.keys(PRECACHE).map(function(key) {
+    return PRECACHE[key];
   });
 
   event.waitUntil(
@@ -62,7 +62,7 @@ self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
 
   event.respondWith(
-    caches.open(CURRENT_CACHES['read-through']).then(function(cache) {
+    caches.open(PRECACHE['read-through']).then(function(cache) {
         return cache.match(event.request).then(function(response) {
             if (response) {
           // If there is an entry in the cache for event.request, then response will be defined

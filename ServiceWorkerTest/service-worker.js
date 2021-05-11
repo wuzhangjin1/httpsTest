@@ -7,7 +7,7 @@
 // updated service worker is activated.
 var CACHE_VERSION = 1;
 var CURRENT_CACHES  = {
-  'read-through': 'read-through-cache-v' + CACHE_VERSION
+  'prefetch': 'read-through-cache-v' + CACHE_VERSION
 };
 
 // The install handler takes care of precaching the resources we always need.
@@ -21,7 +21,7 @@ self.addEventListener('install', event => {
   console.log('Handling install event. Resources to prefetch:', urlsToPrefetch);
 
   event.waitUntil(
-    caches.open(CURRENT_CACHES.read-through)
+    caches.open(CURRENT_CACHES.prefetch)
       .then(cache => cache.addAll(urlsToPrefetch))
       .then(self.skipWaiting())
   );

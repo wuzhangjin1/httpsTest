@@ -34,18 +34,18 @@ self.addEventListener('activate',  event => {
   // there are multiple versioned caches.
   var expectedCacheNamesSet = new Set(Object.values(CURRENT_CACHES));
 
-  event.waitUntil(self.clients.claim()
-    // caches.keys().then(cacheNames => {
-    //   return Promise.all(
-    //     cacheNames.map(cacheName => {
-    //       if (!expectedCacheNamesSet.has(cacheName)) {
-    //         // If this cache name isn't present in the array of "expected" cache names, then delete it.
-    //         console.log('Deleting out of date cache:', cacheName);
-    //         return caches.delete(cacheName);
-    //       }
-    //     })
-    //   );
-    // }).then(self.clients.claim())
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (!expectedCacheNamesSet.has(cacheName)) {
+            // If this cache name isn't present in the array of "expected" cache names, then delete it.
+            console.log('Deleting out of date cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(self.clients.claim())
   );
 });
   

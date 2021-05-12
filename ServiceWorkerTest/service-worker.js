@@ -45,8 +45,9 @@ self.addEventListener('activate',  event => {
           }
         })
       );
-    }).then(self.clients.claim())
+    }) //.then(self.clients.claim())
   );
+  self.clients.claim();
 });
   
 // The fetch handler serves responses for same-origin resources from a cache.

@@ -7,13 +7,11 @@
 // updated service worker is activated.
 var CACHE_VERSION = 1;
 var CURRENT_CACHES  = {
-  'prefetch': 'read-through-cache-v' + CACHE_VERSION
+  'prefetch': 'prefetch-cache-v' + CACHE_VERSION
 };
 
 // The install handler takes care of precaching the resources we always need.
 self.addEventListener('install', event => {
-  var now = Date.now();
-
   var urlsToPrefetch = [
     'styles/main.css'
   ];
@@ -59,7 +57,7 @@ self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
 
   event.respondWith(
-    caches.open(CURRENT_CACHES['read-through']).then(function(cache) {
+    caches.open(CURRENT_CACHES['prefetch']).then(function(cache) {
         return cache.match(event.request).then(function(response) {
           if (response) {
           // If there is an entry in the cache for event.request, then response will be defined

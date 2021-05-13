@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="description" content="Sample of selective caching with service workers.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Service Worker Sample: ShouldInterceptRequest Contrast Test</title>
+
+    <script>
+      // Service workers require HTTPS (http://goo.gl/lq4gCo). If we're running on a real web server
+      // (as opposed to localhost on a custom port, which is allowed), then change the protocol to HTTPS.
+      if ((!location.port || location.port == "80") && location.protocol != 'https:') {
+        location.protocol = 'https:';
+      }
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+  </head>
+
+  <body>
+    <h1>Service Worker Sample: ShouldInterceptRequest Contrast Test</h1>
+
+    <p>
+      This sample demonstrates basic service worker registration, in conjunction with read-through
+      caching.
+    </p>
+
+    <p>
+      Visit <code>chrome://inspect/#service-workers</code> and click on the "inspect" link below
+      the registered service worker to view logging statements for the various actions the
+      <code><a href="service-worker.js">service-worker.js</a></code> script is performing.
+    </p>
+
+    <div class="output">
+      <div id="status">This page does not have service-worker!</div>
+    </div>
+
+    <div id ="picture">
+      <img src="images/0.jpg">
+      <img src="images/1.jpg">
+      <img src="images/2.jpg">
+      <img src="images/3.jpg">
+      <img src="images/4.jpg">
+      <img src="images/5.jpg">
+      <img src="images/6.jpg">
+      <img src="images/7.jpg">
+      <img src="images/8.jpg">
+      <img src="images/9.jpg">
+    </div>
+
+  </body>
+</html>

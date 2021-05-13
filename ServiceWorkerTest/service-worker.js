@@ -18,17 +18,16 @@ self.addEventListener('install', event => {
 
   console.log('Handling install event. Resources to prefetch:', urlsToPrefetch);
 
-  self.skipWaiting();
-
   event.waitUntil(
     caches.open(CURRENT_CACHES.prefetch)
       .then(cache => cache.addAll(urlsToPrefetch))
+      .then(self.skipWaiting())
   );
 });
   
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate',  event => {
-  console.log('Activate event:', event);
+  console.log('Handling activate event:', event);
   // Delete all caches that aren't named in CURRENT_CACHES.
   // While there is only one cache in this example, the same logic will handle the case where
   // there are multiple versioned caches.
@@ -45,7 +44,7 @@ self.addEventListener('activate',  event => {
           }
         })
       );
-    }).then(self.clients.claim())
+    }).then(() => self.clients.claim())
   );
 });
   

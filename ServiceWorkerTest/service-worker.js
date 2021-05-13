@@ -13,7 +13,18 @@ var CURRENT_CACHES  = {
 // The install handler takes care of precaching the resources we always need.
 self.addEventListener('install', event => {
   var urlsToPrefetch = [
-    'styles/main.css'
+    'styles/main.css',
+    './',
+    'images/0.jpg',
+    'images/1.jpg',
+    'images/2.jpg',
+    'images/3.jpg',
+    'images/4.jpg',
+    'images/5.jpg',
+    'images/6.jpg',
+    'images/7.jpg',
+    'images/8.jpg',
+    'images/9.jpg'
   ];
 
   console.log('Handling install event. Resources to prefetch:', urlsToPrefetch);
